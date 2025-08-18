@@ -1,73 +1,20 @@
-// import Lottie from "lottie-react";
-// import registerLottieData from "../../assets/Register.json"
-// import { FaEyeSlash } from "react-icons/fa";
-// import { Link } from "react-router-dom";
-
-// const Register = () => {
-//     return (
-//         <div className="w-11/12 mx-auto max-w-md bg-blue-50 shadow-md p-8 rounded mt-10 flex">
-//             <div>
-//             <h2 className="text-4xl font-bold text-center">SignUp Now!</h2>
-//             <form className="space-y-4 mt-8">
-//                 <div>
-//                     <label className="block font-normal mb-1">Name</label>
-//                     <input type="text"
-//                         placeholder="Name" name="name" className="input input-bordered w-full" required />
-//                 </div>
-//                 <div>
-//                     <label className="block font-normal mb-1">Photo URL</label>
-//                     <input type="text"
-//                         placeholder="Photo URL" name="photo" className="input input-bordered w-full" required />
-//                 </div>
-//                 <div>
-//                     <label className="block font-normal mb-1">Email</label>
-//                     <input type="email"
-//                         placeholder="Email" name="email" className="input input-bordered w-full" required />
-//                 </div>
-//                 <div className="relative">
-//                     <label className="block font-normal mb-1">Password</label>
-//                     <input type="password"
-//                         placeholder="Password" name="password" className="input input-bordered w-full" required />
-//                     <button className="btn btn-xs absolute right-4 mt-2">
-//                          <FaEyeSlash></FaEyeSlash>
-
-//                     </button>
-//                 </div>
-
-
-//                 <div className="text-center">
-//                     <button type="submit" className="btn w-full  font-bold text-blue-500 border-blue-500 text-center">SignUp</button>
-//                 </div>
-
-//                 <p className="font-medium text-center">Already Have An Account? Please <Link className="text-red-500" to="/login">Login</Link></p>
-
-
-//                 <div className="divider font-bold">OR</div>
-//                 {/* <div className="text-center">
-//                     <SocialLogin></SocialLogin>
-//                 </div> */}
-//             </form>
-//             </div>
-//             <div>
-//                 <Lottie animationData={registerLottieData}></Lottie>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Register;
-
-
-
 import Lottie from "lottie-react";
 import registerLottieData from "../../assets/Register.json"
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const Register = () => {
 
+    // distructuring data from AuthContext
+    const { user, createUser } = useContext(AuthContext);
+
+    // error message state
     const [errorMessage, setErrorMessage] = useState('');
+
+    // show password state
+    const [showPassword, setShowPassword] = useState(false);
 
     // event handler
     const handleRegister = (e) => {
@@ -78,11 +25,17 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-
-        console.log(name, photo, email, password);
+        const terms = form.terms.checked;
+        console.log(name, photo, email, password, terms);
 
         // reset error and status
         setErrorMessage('');
+
+        // terms validation
+        if(!terms) {
+            setErrorMessage('Please accept our terms and conditions');
+            return;
+        }
 
         // password validation
         if (password.length < 6) {
@@ -101,6 +54,15 @@ const Register = () => {
             setErrorMessage("Password must include at least one special character");
             return;
         }
+
+        // call createUser with email and password
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
 
     }
 
@@ -124,11 +86,24 @@ const Register = () => {
                     </div>
                     <div className="relative">
                         <label className="block font-normal mb-1">Password</label>
-                        <input type="password" placeholder="Password" name="password" className="input input-bordered w-full" required />
-                        <button type="button" className="btn btn-xs absolute right-4 mt-2">
-                            <FaEyeSlash />
+                        <input
+                            type={showPassword ? "text" : "password"} placeholder="Password" name="password" className="input input-bordered w-full" required />
+                        <button onClick={() => setShowPassword(!showPassword)} type="button" className="btn btn-xs absolute right-4 mt-2">
+                            {
+                                showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
+                            }
                         </button>
                     </div>
+
+                    {/* terms */}
+                    <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
+
+                        <label className="label">
+                            <input type="checkbox"
+                                name="terms" className="checkbox" />
+                            Accept Our Terms And Conditions.
+                        </label>
+                    </fieldset>
 
                     <div className="text-center">
                         <button type="submit" className="btn w-full font-bold text-green-500 border-green-500">SignUp</button>
