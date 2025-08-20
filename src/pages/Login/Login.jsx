@@ -1,10 +1,14 @@
 import Lottie from "lottie-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import loginLottieData from "../../assets/Login.json"
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const Login = () => {
+
+    // distructuring from authcontext
+    const { loginUser } = useContext(AuthContext);
 
     // show password state
     const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +21,16 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        // call loginUser with email and password
+        loginUser(email, password)
+        .then(result =>{
+            console.log(result.user)
+        })
+        .catch(error =>{
+            console.log(error.message);
+            
+        })
     }
     return (
         <div className="w-11/12 mx-auto max-w-5xl mt-10 flex flex-col md:flex-row items-center gap-10">
