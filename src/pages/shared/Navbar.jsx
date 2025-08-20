@@ -1,13 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
 
     const links = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <li><NavLink className={({ isActive }) =>
+            isActive ? "text-green-400 font-bold underline" : "font-semibold"
+        } to="/">Home</NavLink></li>
+
+        <li><NavLink className={({ isActive }) =>
+            isActive ? "text-green-400 font-bold underline" : "font-semibold"
+        } >Add Blog</NavLink></li>
+
+        <li><NavLink className={({ isActive }) =>
+            isActive ? "text-green-400 font-bold underline" : "font-semibold"
+        } >All Blogs</NavLink></li>
+
+        <li><NavLink className={({ isActive }) =>
+            isActive ? "text-green-400 font-bold underline" : "font-semibold"
+        } >Featured Blogs</NavLink></li>
+
+        <li><NavLink className={({ isActive }) =>
+            isActive ? "text-green-400 font-bold underline" : "font-semibold"
+        }>Wishlist</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar shadow-sm sticky top-0 z-50 backdrop-blur-md bg-green-50/90 rounded-md">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -19,16 +36,16 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <Link to="/" className="btn btn-ghost normal-case text-3xl text-green-700 font-bold">Blog Website</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                   {links}
+                    {links}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <Link to='/register'>Register</Link>
-                <Link>Sign In</Link>
+            <div className="navbar-end gap-2">
+                <Link className="btn btn-outline hover:bg-green-200 bg-green-300" to='/register'>Register</Link>
+                <Link className="btn btn-outline hover:bg-green-200 bg-green-300" to='/login'>Log In</Link>
             </div>
         </div>
     );

@@ -122,7 +122,7 @@ const Register = () => {
             </div>
 
             {/* Right Side - Lottie */}
-            <div className="w-full md:w-1/2 flex justify-center bg-green-50">
+            <div className="w-full md:w-1/2 flex justify-center">
                 <Lottie animationData={registerLottieData} loop={true} className="w-80 md:w-full" />
             </div>
         </div>
