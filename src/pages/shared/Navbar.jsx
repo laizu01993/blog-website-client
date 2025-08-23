@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import logo from "../../assets/logo.png"
 
 const Navbar = () => {
 
@@ -30,7 +31,15 @@ const Navbar = () => {
     </>
 
     // logout button
-    const handleLogout = () =>{}
+    const handleLogout = () => {
+        logoutUser()
+            .then(() => {
+                console.log('successful log out');
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }
     return (
         <div className="navbar shadow-sm sticky top-0 z-50 backdrop-blur-md bg-green-50/90 rounded-md">
             <div className="navbar-start">
@@ -44,7 +53,15 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-3xl text-green-700 font-bold">My Blog</Link>
+                <Link to="/" className="flex items-center gap-2 btn btn-ghost normal-case text-3xl text-green-700 font-bold">
+                    <img
+                        src={logo}
+                        alt="My Blog Logo"
+                        className="w-10 h-10 rounded-full"
+                    />
+                    My Blog
+                </Link>
+
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -55,15 +72,15 @@ const Navbar = () => {
                 {/* conditional button for user */}
                 {
                     user ? <>
-                    <div>
-                        <img
+                        <div>
+                            <img
                                 src={user.photoURL || "/default-avatar.png"}
-                                
+
                                 className="w-10 h-10 rounded-full border-2 border-primary"
                             />
                         </div>
                         <div>
-                        <button onClick={handleLogout} className="btn btn-outline bg-green-300 text-white hover:bg-green-500">Log out</button>
+                            <button onClick={handleLogout} className="btn btn-outline bg-green-300 text-white hover:bg-green-500">Log out</button>
                         </div></> : <>
                         <Link className="btn btn-outline hover:bg-green-200 bg-green-300" to='/register'>Register</Link>
                         <Link className="btn btn-outline hover:bg-green-200 bg-green-300" to='/login'>Log In</Link></>

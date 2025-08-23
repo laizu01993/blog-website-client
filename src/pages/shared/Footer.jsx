@@ -1,4 +1,5 @@
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import logo from "../../assets/logo.png"
 
 const Footer = () => {
     return (
@@ -6,11 +7,14 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
                 {/* Brand / About */}
-                <div>
-                    <h2 className="text-2xl font-bold text-green-700">MyBlog</h2>
-                    <p className="mt-2 text-sm leading-relaxed">
-                        Share and discover inspiring blogs from writers around the world.
-                    </p>
+                <div className="flex items-center space-x-3">
+                    <img src={logo} alt="MyBlog Logo" className="w-10 h-10 object-contain" />
+                    <div>
+                        <h2 className="text-2xl font-bold text-green-700">MyBlog</h2>
+                        <p className="mt-2 text-sm leading-relaxed">
+                            Share and discover inspiring blogs from writers around the world.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Quick Links */}
@@ -36,12 +40,12 @@ const Footer = () => {
                 <div>
                     <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
                     <div className="flex space-x-4 text-2xl">
-                        <button><FaFacebook className="bg-blue-600 text-white rounded-full"/></button>
+                        <button><FaFacebook className="bg-blue-600 text-white rounded-full" /></button>
                         <button><FaTwitter
-                        className="text-blue-300" /></button>
+                            className="text-blue-300" /></button>
                         <button><FaGithub />
-</button>
-                        
+                        </button>
+
                     </div>
                 </div>
             </div>
