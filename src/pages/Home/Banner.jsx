@@ -10,13 +10,14 @@ const Banner = () => {
                     <motion.img
                         src={banner1}
                         animate={{y: [50, 100, 50]}}
-                        transition={{duration: 5, repeat: Infinity}}
+                        transition={{duration: 10, repeat: Infinity}}
                         className="max-w-sm rounded-t-[40px] rounded-br-[40px] shadow-2xl w-80 border-b-4 border-l-4 border-green-500"
                     />
                     <motion.img
                         src={banner2}
                         animate={{x: [100, 150, 100]}}
-                        transition={{duration: 5, repeat: Infinity}}
+                        transition={{duration: 10,
+                            delay: 5, repeat: Infinity}}
                         className="max-w-sm rounded-t-[40px] rounded-br-[40px] shadow-2xl w-80 border-b-4 border-l-4 border-green-500"
                     />
                 </div>

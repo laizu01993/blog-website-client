@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
+
+// google provider
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
@@ -12,32 +15,38 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // authentication with email and password(create user)
-    const createUser = (email, password) =>{
+    const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     // signin/login
-    const loginUser = (email, password) =>{
+    const loginUser = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // signin with google
+    const signInWithGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
     // signout/logout
-    const logoutUser = () =>{
+    const logoutUser = () => {
         setLoading(true);
         return signOut(auth);
     }
 
     // observer for user
-    useEffect( () =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log('state captured', currentUser);
-            
+
             setLoading(false);
         })
-        return () =>{
+        return () => {
             unsubscribe();
         }
     }, [])
@@ -47,6 +56,7 @@ const AuthProvider = ({ children }) => {
         loading,
         createUser,
         loginUser,
+        signInWithGoogle,
         logoutUser
     }
     return (

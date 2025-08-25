@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import loginLottieData from "../../assets/Login.json"
 import AuthContext from "../../context/AuthContext/AuthContext";
+import SocialLogin from "../shared/SocialLogin";
 
 const Login = () => {
 
@@ -63,6 +64,9 @@ const Login = () => {
                     </p>
 
                     <div className="divider font-bold">OR</div>
+                    <div className="text-center">
+                        <SocialLogin></SocialLogin>
+                    </div>
                 </form>
             </div>
 

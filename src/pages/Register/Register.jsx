@@ -4,6 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import SocialLogin from "../shared/SocialLogin";
 
 const Register = () => {
 
@@ -32,7 +33,7 @@ const Register = () => {
         setErrorMessage('');
 
         // terms validation
-        if(!terms) {
+        if (!terms) {
             setErrorMessage('Please accept our terms and conditions');
             return;
         }
@@ -114,6 +115,10 @@ const Register = () => {
                     </p>
 
                     <div className="divider font-bold">OR</div>
+
+                    <div className="text-center">
+                        <SocialLogin></SocialLogin>
+                    </div>
                 </form>
                 {/* set error message */}
                 {
