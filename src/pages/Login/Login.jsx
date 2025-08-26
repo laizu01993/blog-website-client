@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import loginLottieData from "../../assets/Login.json"
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
+import Swal from "sweetalert2";
 
 const Login = () => {
 
@@ -25,13 +26,28 @@ const Login = () => {
 
         // call loginUser with email and password
         loginUser(email, password)
-        .then(result =>{
-            console.log(result.user)
-        })
-        .catch(error =>{
-            console.log(error.message);
-            
-        })
+            .then(result => {
+                console.log(result.user)
+                // sweet alert for successful
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch(error => {
+                console.log(error.message);
+                // sweet alert for error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
     }
     return (
         <div className="w-11/12 mx-auto max-w-5xl mt-10 flex flex-col md:flex-row items-center gap-10">

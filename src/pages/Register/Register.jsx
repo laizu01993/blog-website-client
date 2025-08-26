@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
@@ -60,9 +61,25 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+                // sweet alert for successful
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Registration Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
             .catch(error => {
                 console.log(error.message);
+                // sweet alert for error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
 
     }

@@ -1,21 +1,22 @@
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
-const SocialLogin = () =>{
+const SocialLogin = () => {
 
     // distructuring from auth context
-    const {signInWithGoogle} = useContext(AuthContext);
+    const { signInWithGoogle } = useContext(AuthContext);
 
     // button handler
-    const handleGoogleSignIn = () =>{
+    const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(result =>{
-            console.log(result.user);
-        })
-        .catch(error =>{
-            console.log(error.message)
-        })
-    } 
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+    }
 
     return (
         <div>
