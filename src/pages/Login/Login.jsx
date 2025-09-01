@@ -1,13 +1,16 @@
 import Lottie from "lottie-react";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginLottieData from "../../assets/Login.json"
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
 import Swal from "sweetalert2";
 
 const Login = () => {
+
+    // navigate hook
+    const navigate = useNavigate();
 
     // distructuring from authcontext
     const { loginUser } = useContext(AuthContext);
@@ -36,6 +39,8 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                form.reset();
+                navigate("/");
             })
             .catch(error => {
                 console.log(error.message);
@@ -45,7 +50,8 @@ const Login = () => {
                     title: "Oops...",
                     text: error.message,
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    position: 'top-end'
                 });
             })
     }

@@ -1,13 +1,16 @@
 import Lottie from "lottie-react";
 import registerLottieData from "../../assets/Register.json"
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
 import Swal from "sweetalert2";
 
 const Register = () => {
+
+    // navigate hook
+    const navigate = useNavigate();
 
     // distructuring data from AuthContext
     const { user, createUser } = useContext(AuthContext);
@@ -80,6 +83,8 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                form.reset();
+                navigate("/");
             })
 
     }
