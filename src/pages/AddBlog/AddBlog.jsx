@@ -107,6 +107,7 @@
 
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const AddBlog = () => {
     const { user } = useContext(AuthContext);
@@ -129,11 +130,35 @@ const AddBlog = () => {
             shortDescription,
             longDescription,
             // not from form, from AuthContext
-            email: user?.email,   
-            name: user?.displayName,  
-            createdAt: new Date()     
+            email: user?.email,
+            name: user?.displayName,
+            createdAt: new Date()
         };
         console.log(title, blogImage, category, shortDescription, longDescription);
+
+        // send data to the server side
+        fetch('http://localhost:5000/blog', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newBlog)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Blog added successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset();
+
+                }
+            })
 
     };
 
