@@ -131,7 +131,7 @@ const AddBlog = () => {
             longDescription,
             // not from form, from AuthContext
             email: user?.email,
-            name: user?.displayName,
+            name: user?.displayName || "Anonymous",
             createdAt: new Date()
         };
         console.log(title, blogImage, category, shortDescription, longDescription);
