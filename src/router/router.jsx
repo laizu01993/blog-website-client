@@ -7,6 +7,7 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/LogIn/LogIn";
 import NotFound from "../pages/NotFound/NotFound";
 import AddBlog from "../pages/AddBlog/AddBlog";
+import AllBlogs from "../pages/AllBlogs/AllBlogs";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
       {
         path: '/addBlog',
         element: <AddBlog></AddBlog>
+      },
+      {
+        path: '/allBlogs',
+        element: <AllBlogs></AllBlogs>,
+        loader: () =>fetch('http://localhost:5000/blogs')
       },
       {
         path: '/register',

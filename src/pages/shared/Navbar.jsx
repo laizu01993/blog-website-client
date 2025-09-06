@@ -19,7 +19,7 @@ const Navbar = () => {
 
         <li><NavLink className={({ isActive }) =>
             isActive ? "text-green-400 font-bold underline" : "font-semibold"
-        } >All Blogs</NavLink></li>
+        } to="/allBlogs" >All Blogs</NavLink></li>
 
         <li><NavLink className={({ isActive }) =>
             isActive ? "text-green-400 font-bold underline" : "font-semibold"
