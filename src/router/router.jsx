@@ -9,6 +9,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import AddBlog from "../pages/AddBlog/AddBlog";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import Wishlist from "../pages/Wishlist/Wishlist";
+import FeaturedBlogs from "../pages/FeaturedBlogs/FeaturedBlogs";
 
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/wishlist',
         element: <Wishlist></Wishlist>
+      },
+      {
+        path: '/featuredBlogs',
+        element: <FeaturedBlogs></FeaturedBlogs>
       },
       {
         path: '/register',

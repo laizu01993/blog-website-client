@@ -1,9 +1,15 @@
 
 
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
+import Swal from "sweetalert2";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const RecentBlogCard = ({ blog }) => {
+
+    const {user} = useContext(AuthContext);
+    
     // Destructuring with default values
     const {
         title,
@@ -14,6 +20,37 @@ const RecentBlogCard = ({ blog }) => {
         name,
         authorImage,
     } = blog || {};
+
+    // handle wishlist button
+    const handleAddToWishlist = () => {
+        const wishlistItem = {
+            title: blog.title,
+            category: blog.category,
+            blogImage: blog.blogImage,
+            email: user.email,
+            createdAt: new Date()
+        };
+
+        fetch('http://localhost:5000/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(wishlistItem),
+        })
+            .then(res => res.json())
+            .then(data => {
+                // sweet alert for successful
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Blog added to wishlist successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+
+            });
+    }
 
     // Safely format createdAt
     const timeAgo = createdAt
@@ -45,9 +82,9 @@ const RecentBlogCard = ({ blog }) => {
                 <div className="flex items-center justify-between text-sm font-medium text-gray-500">
                     <div className="flex items-center gap-2">
                         <img
-                            src={authorImage || 
+                            src={authorImage ||
                                 //  fallback avatar
-                                "https://i.ibb.co/4RhtcZVD/default-avatar-icon-of-social-media-user-vector.jpg"} 
+                                "https://i.ibb.co/4RhtcZVD/default-avatar-icon-of-social-media-user-vector.jpg"}
                             alt={name || "Anonymous"}
                             className="w-6 h-6 rounded-full"
                         />
@@ -59,7 +96,7 @@ const RecentBlogCard = ({ blog }) => {
                 {/* Buttons */}
                 <div className="card-actions justify-between mt-3">
                     <button className="btn bg-green-400 hover:bg-green-500 rounded-md border-black  btn-sm">Details</button>
-                    <button className="btn btn-outline rounded-md btn-sm"><FaRegHeart /> Wishlist</button>
+                    <button onClick={handleAddToWishlist} className="btn btn-outline rounded-md btn-sm"><FaRegHeart /> Wishlist</button>
                 </div>
             </div>
         </div>

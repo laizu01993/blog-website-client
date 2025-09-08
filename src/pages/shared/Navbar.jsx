@@ -23,7 +23,7 @@ const Navbar = () => {
 
         <li><NavLink className={({ isActive }) =>
             isActive ? "text-green-400 font-bold underline" : "font-semibold"
-        } >Featured Blogs</NavLink></li>
+        } to="/featuredBlogs" >Featured Blogs</NavLink></li>
 
         <li><NavLink className={({ isActive }) =>
             isActive ? "text-green-400 font-bold underline" : "font-semibold"
