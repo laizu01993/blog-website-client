@@ -8,6 +8,8 @@ import Login from "../pages/LogIn/LogIn";
 import NotFound from "../pages/NotFound/NotFound";
 import AddBlog from "../pages/AddBlog/AddBlog";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
+import Wishlist from "../pages/Wishlist/Wishlist";
+
 
 
 const router = createBrowserRouter([
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
         path: '/allBlogs',
         element: <AllBlogs></AllBlogs>,
         loader: () =>fetch('http://localhost:5000/blogs')
+      },
+      {
+        path: '/wishlist',
+        element: <Wishlist></Wishlist>
       },
       {
         path: '/register',

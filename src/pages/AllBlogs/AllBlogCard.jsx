@@ -1,7 +1,12 @@
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
+import AuthContext from "../../context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const AllBlogCard = ({ blog }) => {
+
+    const {user} = useContext(AuthContext)
 
     // Destructuring with default values
     const {
@@ -13,6 +18,38 @@ const AllBlogCard = ({ blog }) => {
         name,
         authorImage,
     } = blog || {};
+
+    // handle wishlist button
+    const handleAddToWishlist = () => {
+        const wishlistItem = {
+            title: blog.title,
+            category: blog.category,
+            blogImage: blog.blogImage,
+            email: user.email,
+            createdAt: new Date()
+        };
+
+        fetch('http://localhost:5000/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(wishlistItem),
+        })
+            .then(res => res.json())
+            .then(data => {
+                // sweet alert for successful
+                if(data.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Blog added to wishlist successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                }
+                
+            });
+    };
+
 
     // Safely format createdAt
     const timeAgo = createdAt
@@ -58,7 +95,7 @@ const AllBlogCard = ({ blog }) => {
                 {/* Buttons */}
                 <div className="card-actions justify-between mt-3">
                     <button className="btn bg-green-400 hover:bg-green-500 rounded-md border-black  btn-sm">Details</button>
-                    <button className="btn btn-outline rounded-md btn-sm"><FaRegHeart /> Wishlist</button>
+                    <button onClick={handleAddToWishlist} className="btn btn-outline rounded-md btn-sm"><FaRegHeart /> Wishlist</button>
                 </div>
             </div>
         </div>

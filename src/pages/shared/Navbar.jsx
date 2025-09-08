@@ -27,7 +27,7 @@ const Navbar = () => {
 
         <li><NavLink className={({ isActive }) =>
             isActive ? "text-green-400 font-bold underline" : "font-semibold"
-        }>Wishlist</NavLink></li>
+        } to="/wishlist">Wishlist</NavLink></li>
     </>
 
     // logout button
