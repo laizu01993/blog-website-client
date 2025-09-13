@@ -67,7 +67,7 @@ const FeaturedBlogs = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-6">
-            <h2 className="text-2xl font-bold mb-6 text-center">Top 10 Featured Blogs</h2>
+            <h2 className="text-4xl font-bold mb-6 text-center">Top 10 Featured Blogs</h2>
 
             {/* Desktop Table */}
             <div className="hidden lg:block overflow-x-auto rounded-lg shadow">
@@ -88,7 +88,8 @@ const FeaturedBlogs = () => {
                     </thead>
                     <tbody>
                         {table.getRowModel().rows.map(row => (
-                            <tr key={row.id}>
+                            <tr key={row.id} 
+                             className="hover:bg-green-100 transition-colors duration-300">
                                 {row.getVisibleCells().map(cell => (
                                     <td key={cell.id} className="border-b border-gray-300 p-2">
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -103,7 +104,7 @@ const FeaturedBlogs = () => {
             {/* Mobile Cards */}
             <div className="lg:hidden flex flex-col gap-4">
                 {blogs.map(blog => (
-                    <div key={blog._id} className="bg-white shadow rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div key={blog._id} className="bg-white shadow rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 hover:bg-green-50 transition-colors duration-300">
                         <div className="w-full sm:w-20 flex-shrink-0">
                             <img src={blog.blogImage} alt={blog.title} className="w-20 h-20 object-cover rounded-md" />
                         </div>

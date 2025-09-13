@@ -132,6 +132,7 @@ const AddBlog = () => {
             // not from form, from AuthContext
             email: user?.email,
             name: user?.displayName || "Anonymous",
+            authorImage: user?.photoURL,
             createdAt: new Date()
         };
         console.log(title, blogImage, category, shortDescription, longDescription);

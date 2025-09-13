@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import Swal from "sweetalert2";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import { Link } from "react-router-dom";
 
 const RecentBlogCard = ({ blog }) => {
 
@@ -12,6 +13,7 @@ const RecentBlogCard = ({ blog }) => {
     
     // Destructuring with default values
     const {
+        _id,
         title,
         blogImage,
         shortDescription,
@@ -95,7 +97,8 @@ const RecentBlogCard = ({ blog }) => {
 
                 {/* Buttons */}
                 <div className="card-actions justify-between mt-3">
-                    <button className="btn bg-green-400 hover:bg-green-500 rounded-md border-black  btn-sm">Details</button>
+                    <Link to={`/blogs/${_id}`}>
+                    <button className="btn bg-green-400 hover:bg-green-500 rounded-md border-black  btn-sm">Details</button></Link>
                     <button onClick={handleAddToWishlist} className="btn btn-outline rounded-md btn-sm"><FaRegHeart /> Wishlist</button>
                 </div>
             </div>

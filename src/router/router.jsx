@@ -10,6 +10,8 @@ import AddBlog from "../pages/AddBlog/AddBlog";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import Wishlist from "../pages/Wishlist/Wishlist";
 import FeaturedBlogs from "../pages/FeaturedBlogs/FeaturedBlogs";
+import BlogDetails from "../pages/BlogDetails/BlogDetails";
+import UpdateBlog from "../pages/UpdateBlog/UpdateBlog";
 
 
 
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: '/allBlogs',
         element: <AllBlogs></AllBlogs>,
-        loader: () =>fetch('http://localhost:5000/blogs')
+        loader: () => fetch('http://localhost:5000/blogs')
       },
       {
         path: '/wishlist',
@@ -40,12 +42,22 @@ const router = createBrowserRouter([
         element: <FeaturedBlogs></FeaturedBlogs>
       },
       {
+        path: '/blogs/:id',
+        element: <BlogDetails></BlogDetails>,
+        loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+      },
+      {
+        path: '/updateBlog/:id',
+        element: <UpdateBlog></UpdateBlog>,
+        loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+      },
+      {
         path: '/register',
-        element:<Register></Register>
+        element: <Register></Register>
       },
       {
         path: '/login',
-        element:<Login></Login>
+        element: <Login></Login>
       },
       {
         path: "*",
