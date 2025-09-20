@@ -6,6 +6,10 @@ import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+import auth from "../../firebase/firebase.init";
+
+
 
 const Register = () => {
 
@@ -64,15 +68,42 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
-                // sweet alert for successful
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Registration Successful",
-                    showConfirmButton: false,
-                    timer: 1500
+                // update profile
+                return updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: photo
                 });
             })
+            .then(() => {
+                const createdAt = new Date();
+
+                const newUser = { name, email, createdAt }
+                // save new user info to the database
+                return fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })   
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    console.log('navigating to home page')
+                    // sweet alert for successful
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Registration Successful",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    form.reset();
+                    navigate("/");
+                }
+            })
+            
             .catch(error => {
                 console.log(error.message);
                 // sweet alert for error
@@ -83,11 +114,13 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                form.reset();
-                navigate("/");
             })
 
-    }
+
+
+
+
+    };
 
     return (
         <div className="w-11/12 mx-auto max-w-5xl mt-10 flex flex-col md:flex-row items-center gap-10">
