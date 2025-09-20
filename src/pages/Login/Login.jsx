@@ -1,13 +1,15 @@
 import Lottie from "lottie-react";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginLottieData from "../../assets/Login.json"
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/SocialLogin";
 import Swal from "sweetalert2";
 
 const Login = () => {
+
+    const location = useLocation();
 
     // navigate hook
     const navigate = useNavigate();
@@ -40,7 +42,9 @@ const Login = () => {
                     timer: 1500
                 });
                 form.reset();
-                navigate("/");
+                // Redirect to the desired page or home
+                const from = location.state?.from?.pathname || "/";
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error.message);
