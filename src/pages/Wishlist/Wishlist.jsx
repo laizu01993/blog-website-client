@@ -1,12 +1,9 @@
-import {
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from '@tanstack/react-table'
+
 import { useContext, useEffect, useMemo, useState } from 'react';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Wishlist = () => {
 
@@ -21,9 +18,12 @@ const Wishlist = () => {
         if (!user || !user.email)
             return;
 
-        fetch(`http://localhost:5000/wishlist?email=${user.email}`)
-            .then(res => res.json())
-            .then((data) => setWishlist(data));
+        // fetch(`http://localhost:5000/wishlist?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then((data) => setWishlist(data))
+
+        axios.get(`http://localhost:5000/wishlist?email=${user.email}`, {withCredentials: true})
+        .then(res => setWishlist(res.data))
     }, [user?.email]);
 
     // delete wishlist item
