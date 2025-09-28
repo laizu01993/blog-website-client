@@ -1,12 +1,72 @@
-# React + Vite
+# 📝 Blog Website - Client Side
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React-based Blog Website** where users can:
+- Browse and search blogs.
+- Add new blogs.
+- Update and delete their own blogs.
+- Manage their personal **wishlist**.
+- Read featured and recent blogs.
+- Enjoy secure authentication and protected routes.
 
-Currently, two official plugins are available:
+This project is built using **React**, **Tailwind CSS**, **Firebase Authentication**, and **JWT authentication** with a **Node.js + MongoDB backend**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Frontend (Vercel): [https://blog-website-client-three.vercel.app](https://blog-website-client-three.vercel.app)  
+Backend (Render): [https://blog-website-server-r74c.onrender.com](https://blog-website-server-r74c.onrender.com)
+
+---
+
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- React 18
+- React Router DOM
+- Tailwind CSS + DaisyUI
+- Axios
+- SweetAlert2
+- Firebase Authentication
+- JWT with HttpOnly Cookies
+ **Framer Motion** – Smooth animations and transitions
+- **Lottie React** – Lottie animations
+- **TanStack Table** – Dynamic tables for wishlist and blogs
+- **Skeleton Loading** – Beautiful loading states for better UX
+
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- Firebase Email/Password Login
+- Google Sign-In
+- JWT Token for secure API calls
+- Auto logout when token expires or unauthorized access occurs
+
+### 📰 Blog Management
+- **Add Blog** – Users can post blogs with title, image, category, and content.
+- **Update Blog** – Update existing blog data.
+- **View Blog Details** – Read complete blog posts.
+- **Recent Blogs** – Displays the 6 latest blogs.
+- **Search Blogs** – Search by blog title or category.
+
+### ❤️ Wishlist
+- Add blogs to personal wishlist.
+- View all blogs added to the wishlist.
+- Remove blogs from the wishlist.
+
+### 🎨 UI/UX
+- Fully responsive design.
+- Smooth animations and alerts using SweetAlert2.
+- Clean and modern interface with TailwindCSS and DaisyUI.
+
+---
+
+
+
+
