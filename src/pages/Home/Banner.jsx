@@ -30,7 +30,6 @@ const Banner = () => {
                     <p className="text-gray-800 text-lg py-4">
                         Where stories come alive, ideas connect, and your words can inspire the world.Discover blogs that spark new ideas and connect hearts 💡.
                     </p>
-                    <button className="btn btn-primary">Get Started</button>
                 </div>
             </div>
         </div>
