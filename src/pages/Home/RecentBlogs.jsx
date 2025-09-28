@@ -7,7 +7,7 @@ const RecentBlogs = () => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/recentBlogs')
+        fetch('https://blog-website-server-r74c.onrender.com/recentBlogs')
             .then(res => res.json())
             .then(data => {
                 setBlogs(data)

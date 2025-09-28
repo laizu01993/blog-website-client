@@ -8,7 +8,7 @@ const FeaturedBlogs = () => {
 
     // Fetch all blogs
     useEffect(() => {
-        fetch("http://localhost:5000/blogs")
+        fetch("https://blog-website-server-r74c.onrender.com/blogs")
             .then(res => res.json())
             .then(data => {
                 // Sort by word count of longDescription and take top 10

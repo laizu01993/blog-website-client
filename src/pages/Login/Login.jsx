@@ -8,7 +8,7 @@ import SocialLogin from "../shared/SocialLogin";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const Login = () => {
+const LogIn = () => {
 
     const location = useLocation();
 
@@ -34,11 +34,16 @@ const Login = () => {
         loginUser(email, password)
             .then(result => {
                 console.log(result.user.email)
-                const user = { email: email }
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                
+                const user = { email: result.user.email }
+
+                axios.post('https://blog-website-server-r74c.onrender.com/jwt', user, { withCredentials: true })
                     .then(res => {
                         console.log(res.data)
                     })
+                    .catch(err => {
+                        console.error("JWT Error:", err.message);
+                    });
                 // sweet alert for successful
                 Swal.fire({
                     position: "top-end",
@@ -49,8 +54,8 @@ const Login = () => {
                 });
                 form.reset();
                 // Redirect to the desired page or home
-                // const from = location.state?.from?.pathname || "/";
-                // navigate(from, { replace: true });
+                const from = location.state?.from?.pathname || "/";
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error.message);
@@ -110,4 +115,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LogIn;

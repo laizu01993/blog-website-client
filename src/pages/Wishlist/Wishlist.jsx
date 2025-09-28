@@ -4,6 +4,7 @@ import AuthContext from '../../context/AuthContext/AuthContext';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Wishlist = () => {
 
@@ -13,18 +14,26 @@ const Wishlist = () => {
     // wishlist state declare
     const [wishlist, setWishlist] = useState([]);
 
+    const axiosSecure = useAxiosSecure();
+
     // fetch data with useEffect
     useEffect(() => {
         if (!user || !user.email)
             return;
 
-        // fetch(`http://localhost:5000/wishlist?email=${user.email}`)
-        //     .then(res => res.json())
-        //     .then((data) => setWishlist(data))
+        
 
-        axios.get(`http://localhost:5000/wishlist?email=${user.email}`, {withCredentials: true})
-        .then(res => setWishlist(res.data))
+        // axios.get(`https://blog-website-server-r74c.onrender.com/wishlist?email=${user.email}`, { withCredentials: true })
+        //     .then(res => setWishlist(res.data))
+        axiosSecure.get(`/wishlist?email=${user.email}`)
+        .then(res => setWishlist(res.data));
+
     }, [user?.email]);
+
+    // Go to details page
+    const handleDetails = (id) => {
+        navigate(`/blogs/${id}`);
+    };
 
     // delete wishlist item
     const handleDelete = (id) => {
@@ -38,20 +47,20 @@ const Wishlist = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/wishlist/${id}`, {
+                fetch(`https://blog-website-server-r74c.onrender.com/wishlist/${id}`, {
                     method: "DELETE"
                 })
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.deletedCount > 0)
                             // Remove the deleted item from the wishlist state
-                        setWishlist(prev => prev.filter(item => item._id !== id)); {
+                            setWishlist(prev => prev.filter(item => item._id !== id)); {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Blog remove from wishlist.",
                                 icon: "success",
                                 showConfirmButton: false,
-                        timer: 1500
+                                timer: 1500
                             });
                         }
                     })

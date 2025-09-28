@@ -79,7 +79,7 @@ const Register = () => {
 
                 const newUser = { name, email, createdAt }
                 // save new user info to the database
-                return fetch('http://localhost:5000/users', {
+                return fetch('https://blog-website-server-r74c.onrender.com/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

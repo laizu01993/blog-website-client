@@ -24,7 +24,7 @@ const AllBlogs = () => {
             setSearchedBlogs([]);
             return;
         }
-        fetch(`http://localhost:5000/searchBlogs?q=${search}`)
+        fetch(`https://blog-website-server-r74c.onrender.com/searchBlogs?q=${search}`)
             .then(res => res.json())
             .then(data => setSearchedBlogs(data));
     }, [search]);
@@ -33,7 +33,7 @@ const AllBlogs = () => {
 
     // Fetch for filtering categories from backend
     useEffect(() => {
-        fetch("http://localhost:5000/categories")
+        fetch("https://blog-website-server-r74c.onrender.com/categories")
             .then((res) => res.json())
             .then((data) => setCategories(data));
     }, []);

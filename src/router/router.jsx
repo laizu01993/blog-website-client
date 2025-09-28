@@ -4,7 +4,7 @@ import {
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
-import Login from "../pages/LogIn/LogIn";
+import LogIn from "../pages/LogIn/LogIn";
 import NotFound from "../pages/NotFound/NotFound";
 import AddBlog from "../pages/AddBlog/AddBlog";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: '/allBlogs',
         element: <AllBlogs></AllBlogs>,
-        loader: () => fetch('http://localhost:5000/blogs')
+        loader: () => fetch('https://blog-website-server-r74c.onrender.com/blogs')
       },
       {
         path: '/wishlist',
@@ -45,12 +45,12 @@ const router = createBrowserRouter([
       {
         path: '/blogs/:id',
         element: <BlogDetails></BlogDetails>,
-        loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+        loader: ({ params }) => fetch(`https://blog-website-server-r74c.onrender.com/blogs/${params.id}`)
       },
       {
         path: '/updateBlog/:id',
         element: <PrivateRoute><UpdateBlog></UpdateBlog></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+        loader: ({ params }) => fetch(`https://blog-website-server-r74c.onrender.com/blogs/${params.id}`)
       },
       {
         path: '/register',
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login></Login>
+        element: <LogIn></LogIn>
       },
       {
         path: "*",

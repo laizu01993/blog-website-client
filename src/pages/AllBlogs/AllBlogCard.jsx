@@ -31,7 +31,7 @@ const AllBlogCard = ({ blog }) => {
             createdAt: new Date()
         };
 
-        fetch('http://localhost:5000/wishlist', {
+        fetch('https://blog-website-server-r74c.onrender.com/wishlist', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(wishlistItem),

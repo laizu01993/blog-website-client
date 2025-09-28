@@ -32,7 +32,7 @@ const BlogDetails = () => {
 
     // Fetch comments for this blog
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?blogId=${_id}`)
+        fetch(`https://blog-website-server-r74c.onrender.com/comments?blogId=${_id}`)
             .then((res) => res.json())
             .then((data) => setComments(data));
     }, [_id]);
@@ -55,7 +55,7 @@ const BlogDetails = () => {
             createdAt: new Date().toISOString(),
         };
 
-        fetch("http://localhost:5000/comments", {
+        fetch("https://blog-website-server-r74c.onrender.com/comments", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

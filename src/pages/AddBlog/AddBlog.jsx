@@ -6,7 +6,7 @@ const AddBlog = () => {
     const { user } = useContext(AuthContext);
 
     const handleAddBlog = (e) => {
-        e.preventDefault();
+        e.preventDefault();   
 
         const form = e.target;
         const title = form.title.value;
@@ -31,7 +31,7 @@ const AddBlog = () => {
         console.log(title, blogImage, category, shortDescription, longDescription);
 
         // send data to the server side
-        fetch('http://localhost:5000/blog', {
+        fetch('https://blog-website-server-r74c.onrender.com/blogs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
+import axios from "axios";
 
 // google provider
 const googleProvider = new GoogleAuthProvider();
@@ -44,7 +45,24 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             console.log('state captured', currentUser);
 
-            setLoading(false);
+            if (currentUser?.email) {
+                const user = { email: currentUser.email }
+
+                axios.post('https://blog-website-server-r74c.onrender.com/jwt', user, { withCredentials: true })
+                    .then(res =>{
+                        console.log(res.data);
+                        setLoading(false)
+                    })
+            }
+            else {
+                axios.post('https://blog-website-server-r74c.onrender.com/logout', {}, {
+                    withCredentials: true
+                })
+                .then(res => {
+                    console.log(res.data)
+                    setLoading(false);
+                })
+            }
         })
         return () => {
             unsubscribe();

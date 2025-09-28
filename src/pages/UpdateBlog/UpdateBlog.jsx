@@ -30,11 +30,11 @@ const UpdateBlog = () => {
             email: user?.email,
             name: user?.displayName || "Anonymous",
             authorImage: user?.photoURL,
-            createdAt: new Date()
+            updatedAt: new Date()
         };
 
         // send data to the server
-        fetch(`http://localhost:5000/blogs/${blog._id}`, {
+        fetch(`https://blog-website-server-r74c.onrender.com/blogs/${blog._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
